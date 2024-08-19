@@ -1,35 +1,26 @@
-    <div class="content">
-        <h1><strong>Adding Password Hashing and Comparison to Your Node.js Project</strong></h1>
+<h1><strong>Project Title:</strong> E-Commerce Auction Platform</h1>
+
         <h2><strong>Description:</strong></h2>
-        <p>In this project, I integrated secure password hashing and comparison functionalities into a Node.js application using the bcrypt library. This approach ensures that passwords are handled securely by hashing them before storage and verifying them efficiently during authentication. Both asynchronous and synchronous methods were implemented to demonstrate how passwords can be hashed and compared in different scenarios.</p>
-        
-        <h2><strong>Technologies Used:</strong></h2>
+        <p>This project involves designing an eBay-like e-commerce auction site where users can post auction listings, place bids, comment on listings, and manage their watchlist. The site uses Django for backend functionality and provides a comprehensive user interface to manage auction listings and user interactions.</p>
+
+        <h2><strong>Features:</strong></h2>
+
+        <h3><strong>Models:</strong></h3>
         <ul>
-            <li><strong>Node.js:</strong> JavaScript runtime for building scalable server-side applications.</li>
-            <li><strong>bcrypt:</strong> Library for hashing and comparing passwords securely.</li>
+            <li><strong>User:</strong> Inherits from Django's AbstractUser.</li>
+            <li><strong>Listing:</strong> Represents an auction listing with fields for title, description, starting bid, current price, image URL, and category.</li>
+            <li><strong>Bid:</strong> Represents a bid placed by a user on a listing.</li>
+            <li><strong>Comment:</strong> Represents a comment made by a user on a listing.</li>
+            <li><strong>Category:</strong> Represents categories for auction listings.</li>
         </ul>
 
-        <h2><strong>Features Implemented:</strong></h2>
+        <h3><strong>Functionalities:</strong></h3>
         <ul>
-            <li><strong>Asynchronous Password Hashing:</strong>
-                <ul>
-                    <li>Added code to hash passwords asynchronously using bcrypt.hash().</li>
-                    <li>Logged the generated hash to the console.</li>
-                    <li>Utilized bcrypt.compare() to verify if a given password matches the generated hash.</li>
-                </ul>
-            </li>
-            <li><strong>Synchronous Password Hashing:</strong>
-                <ul>
-                    <li>Incorporated code to hash passwords synchronously using bcrypt.hashSync().</li>
-                    <li>Logged the resulting hash to the console.</li>
-                    <li>Compared the hash with the original password using bcrypt.compareSync().</li>
-                </ul>
-            </li>
-            <li><strong>Password Comparison:</strong>
-                <ul>
-                    <li>Implemented password comparison functionality using bcrypt.compare().</li>
-                    <li>Demonstrated the comparison process with both correct and incorrect passwords to ensure accurate verification.</li>
-                </ul>
-            </li>
+            <li><strong>Create Listing:</strong> Users can create a new listing by providing a title, description, starting bid, optional image URL, and category. Created listings are displayed on the Active Listings Page.</li>
+            <li><strong>Active Listings Page:</strong> Displays all active auction listings with title, description, current price, and optional photo. Users can click on a listing to view its details.</li>
+            <li><strong>Listing Page:</strong> Provides details of a specific listing including the current price. Signed-in users can add/remove the item from their watchlist, place bids, or close the auction if they are the creator. Users can add comments to the listing.</li>
+            <li><strong>Watchlist:</strong> Displays all listings that a user has added to their watchlist.</li>
+            <li><strong>Categories:</strong> Lists all categories and allows users to view all active listings in a specific category.</li>
+            <li><strong>Django Admin Interface:</strong> Admins can view, add, edit, and delete listings, comments, and bids through Django’s admin interface.</li>
         </ul>
     </div>
