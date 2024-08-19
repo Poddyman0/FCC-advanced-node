@@ -1,4 +1,4 @@
-Project: E-Commerce Auction Site
+<strong>Project: E-Commerce Auction Site</strong>
 
 <strong>Project Title:</strong> E-Commerce Auction Platform
 
