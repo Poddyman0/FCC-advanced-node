@@ -3,9 +3,8 @@ const bcrypt = require('bcrypt');
 
 module.exports = function (app, myDataBase) {
 
-  //Implement the Serialization of a Passport User
+  // Implement the Serialization of a Passport User
   app.route('/').get((req, res) => {
-    // render variables with pub templates
     res.render('index', {
       title: 'Connected to Database',
       message: 'Please login',
@@ -15,94 +14,78 @@ module.exports = function (app, myDataBase) {
     });
   });
 
+  // Passport authentication strategy for login
+  app.route('/login').post(passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+    res.redirect('/chat');
+  });
 
-  //How to Use Passport authentication Strategies middleware
-  app.route('/login').post(passport.authenticate("local", {failureRedirect: "/"}), (req, res) => {
-    res.redirect('/profile')
-  })
-  // creation of new middleware to ensure user is authenticated with passport
+  // Middleware to ensure user is authenticated
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     }
     res.redirect('/');
-  };
-  // creation of new middleware to ensure user is authenticated with passport
+  }
 
+  // User profile route
   app.route('/profile').get(ensureAuthenticated, (req, res) => {
-    res.render('profile', {username: req.user.username})
-  })
-  // loggin out a user
+    res.render('profile', { username: req.user.username });
+  });
+
+  // Logout route
   app.route('/logout').get((req, res) => {
     req.logout();
     res.redirect('/');
+  });
 
-    app.use((req, res, next) => {
-      res.status(404)
-        .type('text')
-        .send('Not Found');
-    });
+  // Registration route
+  app.route('/register').post((req, res, next) => {
+    const hash = bcrypt.hashSync(req.body.password, 12);
+    console.log('Hashed password entered:', hash);
 
-    app.route('/register')
-    .post((req, res, next) => {
-        //hashing passwords on registration
+    // Check if user already exists
+    myDataBase.findOne({ username: req.body.username }, (err, user) => {
+      if (err) return next(err);
+      if (user) return res.redirect('/');
 
-      const hash = bcrypt.hashSync(req.body.password, 12);
-      //query database
-      myDataBase.findOne({ username: req.body.username }, (err, user) => {
-
-        //If there is an error, call next with the error
-        if (err) {
-          next(err);
-        } //If a user is returned, redirect back to home
-        else if (user) {
-        
-          res.redirect('/');
-        } 
-        //if a user is not found and no errors occur, then insertOne into the database with the username and password. 
-        else {
-          myDataBase.insertOne({
-            username: req.body.username,
-            //hashed passwords
-            password: hash
-          },
-            (err, doc) => {
-              if (err) {
-                res.redirect('/');
-              } //As long as no errors occur there, call next to go to call next error
-              else {
-                // The inserted document is held within
-                // the ops property of the doc
-                next(null, doc.ops[0]);
-              }
-            }
-          )
+      // If user doesn't exist, insert new user
+      myDataBase.insertOne(
+        {
+          username: req.body.username,
+          password: hash,
+        },
+        (err, doc) => {
+          if (err) {
+            return res.redirect('/');
+          } else {
+            next(null, doc.ops[0]);
+          }
         }
-      })
-    },
-      passport.authenticate('local', { failureRedirect: '/' }),
-      (req, res, next) => {
-        res.redirect('/profile');
-      }
-    );
-});
+      );
+    });
+  },
+    passport.authenticate('local', { failureRedirect: '/' }),
+    (req, res) => {
+      res.redirect('/profile');
+    }
+  );
 
-//Implementation of Social Authentication
+  // GitHub authentication routes
+  app.route('/auth/github').get(passport.authenticate('github'));
 
-app.route('/auth/github').get(passport.authenticate("github"), (req, res) => {
+  app.route('/auth/github/callback').get(
+    passport.authenticate('github', { failureRedirect: '/' }),
+    (req, res) => {
+      req.session.user_id = req.user.id;
+      res.redirect('/chat');
+    }
+  );
 
-})
+  // Chat route
+  app.route('/chat').get(ensureAuthenticated, (req, res) => {
+    res.render('chat', { username: req.user.username });
+  });
 
-app.route('/auth/github/callback').get(passport.authenticate("github", {failureRedirect: "/"}), (req, res) => {
-  req.session.user_id = req.user.id
-  res.redirect('/chat')
-})
+  // Catch-all for undefined routes (404)
 
-app.route('/chat').get(ensureAuthenticated, (req, res) => {
-  res.render('chat', {
-    user: req.user
-  })
-})
-
-//leave below
-}
+};

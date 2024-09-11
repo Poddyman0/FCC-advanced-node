@@ -2,6 +2,9 @@
   "name": "fcc-advanced-node-and-express",
   "author": "http://github.com/JosephLivengood",
   "version": "0.0.1",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "What am I about?",
   "main": "server.js",
   "scripts": {
@@ -16,6 +19,7 @@
     "express": "^4.16.1",
     "express-session": "~1.17.1",
     "mongodb": "^3.6.1",
+    "mongoose": "^8.2.1",
     "passport": "^0.4.1",
     "passport-github": "~1.1.0",
     "passport-local": "~1.0.0",

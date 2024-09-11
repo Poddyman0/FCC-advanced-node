@@ -1,22 +1,26 @@
 html
   head
-    title FCC Advanced Node and Express
+    title WhatsUp: An Instant Messaging Platform
     meta(name='description', content='Home page')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/style.css')
   body
-    h1.border.center FCC Advanced Node and Express
-    h2.center Socket.IO Chat Room
-    .chat.center
+    h1.border.center WhatsUp: An Instant Messaging Platform
+    h2.center#welcome Welcome to the chatroom, #{username}!
+
+    .chat
       p#num-users
       .chat-box
         ul#messages
-        form(action='')
-          input#m(autocomplete='off')
-          button Send
-      a#logout(href='/logout') Logout
+        form.chatMessageForm(action='')
+          input#m.messageinput(autocomplete='off')
+          button.messagebutton
+            svg(xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-send" width="70%" height="70%" viewBox="0 0 16 16")
+              path(d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z")
+              
+      a.logoutStyle#logout(href='/logout') Logout
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=', crossorigin='anonymous')
     <script src='/socket.io/socket.io.js'></script>
     script(async, defer, src='/public/client.js')

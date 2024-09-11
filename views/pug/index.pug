@@ -1,15 +1,14 @@
 html
   head
-    title FCC Advanced Node and Express
+    title WhatsUp: An Instant Messaging Platform
     meta(name='description', content='Home page')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/style.css')
   body
-    h1.border.center FCC Advanced Node and Express
+    h1.border.center WhatsUp: An Instant Messaging Platform
     h2.center#pug-success-message
-    | Looks like this page is being rendered from Pug into HTML!
     | #{title}
     p#pug-variable=message
     
@@ -26,7 +25,7 @@ html
           label Password:
           input(type='password', name='password')
         div
-          input(type='submit', value='Log In')
+          input(type='submit', value='Log In').hoverable
           
     if showRegistration
       hr
@@ -39,10 +38,11 @@ html
           label Password:
           input(type='password', name='password')
         div
-          input(type='submit', value='Register')
+          input(type='submit', value='Register').hoverable
 
-    if showSocialAuth
-      hr
-      h2.center Social Login
-      .login.center
-        a(href='/auth/github').text Login with Github!
+if showSocialAuth
+  hr
+  h2.center Social Login
+  .login.center
+    form(action='/auth/github', method='get').center
+      input(type='submit', value='Login with Github!').hoverable

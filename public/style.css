@@ -1,6 +1,5 @@
 .border {
-  border-style: inset;
-  border-width: 1px;
+
   margin: 10px;
 }
 
@@ -14,35 +13,41 @@ div > input {
   margin: 0.5rem;
 }
 
-.login {
-  border: solid 2px #777;
-  width: 50%;
-  background-color: aliceblue;
-}
 
 a.text {
   text-decoration: none;
   font-weight: 700;
 }
 
+
+
+
 form {
   padding: 3px;
-  width: 500px;
+  width: 50%;
 }
 
 form input {
   background-color: #eee;
   border: green solid 2px;
+  background-color: rgb(213, 252, 213);
   padding: 10px; 
   width: 90%; 
   margin-right: .5%;
+  border-radius: 5px;
+
 }
 
+
 form button { 
-  width: 9%;
-  background: rgb(130, 224, 255);
+  width: 10%;
+  background: darkgreen;
+  color: white;
+  font-weight: bold;
   border: none; 
   padding: 10px; 
+  border-radius: 5px;
+
 }
 
 #messages { 
@@ -50,15 +55,89 @@ form button {
   text-align: left;
   margin: 0;
   padding: 0;
-  height: 20em;
+  height: 70%;
   overflow: scroll;
   overflow-x: hidden;
+
 }
+
+
+
+
+body {
+  background-color: rgb(176, 218, 176);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hoverable {
+  cursor: pointer; /* Changes cursor to a pointer when hovering */
+  font-weight: bold;
+  background-color: darkgreen;
+  color: white;
+  font-size: 15px;
+}
+
+.chat-box {
+  background-image: url('https://cdn2.f-cdn.com/contestentries/2046262/58571795/61f00c583e000_thumb900.jpg');
+  background-size: cover; /* Ensures the image covers the entire chat box */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+
+}
+
 
 #messages li { 
   padding: 5px 10px;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: black;
+  width: 100%;
+
 }
 
-#messages li:nth-child(odd) { 
-  background: #eee;
+
+
+.chatMessageForm {
+  width: 99%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  height: 10%;
+}
+
+.messageinput {
+  background-color: #eee;
+  border: green solid 2px;
+  background-color: rgb(213, 252, 213);
+  padding: 1%; 
+  width: 88%; 
+  margin-right: .5%;
+  border-radius: 5px;
+}
+
+.messagebutton {
+  width: 10%;
+  background: darkgreen;
+  color: white;
+  font-weight: bold;
+  border: none; 
+  padding: 1%; 
+  border-radius: 50px;
+
+}
+
+.logoutStyle {
+  cursor: pointer; /* Changes cursor to a pointer when hovering */
+  font-weight: bold;
+  color: white;
+  font-size: 15px;
+
+  border: green solid 2px;
+  background-color: darkgreen;
+  padding: 10px; 
+  width: 90%; 
+  margin-right: .5%;
+  border-radius: 5px;
 }

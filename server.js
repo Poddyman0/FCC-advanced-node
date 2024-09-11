@@ -70,6 +70,8 @@ myDB(async client => {
 
   let currentUsers = 0;
   io.on('connection', (socket) => {
+    console.log('A user has connected:', socket.request.user);
+
     ++currentUsers;
     io.emit('user', {
       username: socket.request.user.username,
@@ -80,8 +82,13 @@ myDB(async client => {
     //Handle a Disconnect
     //Send and Display Chat Messages
     socket.on('chat message', (message) => {
-      io.emit('chat message', { username: socket.request.user.username, message });
-    });
+      console.log(`Received message: ${message} from ${socket.request.user.username}`);
+      io.emit('chat message', {
+        username: socket.request.user.username,
+        userId: socket.request.user._id,  // Send the user ID with the message
+        message
+      });
+  });
     socket.on('disconnect', () => {
       /*anything you want to do on disconnect*/
       console.log('A user has disconnected')
