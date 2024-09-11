@@ -66,7 +66,7 @@ module.exports = function (app, myDataBase) {
   },
     passport.authenticate('local', { failureRedirect: '/' }),
     (req, res) => {
-      res.redirect('/profile');
+      res.redirect('/chat');
     }
   );
 
