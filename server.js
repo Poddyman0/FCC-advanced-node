@@ -17,12 +17,20 @@ const io = require('socket.io')(http);
 const passportSocketIo = require('passport.socketio');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
-const URI = process.env.MONGO_URI;
+const URI = process.env.MONGODB_URI;
 const store = new MongoStore({ url: URI });
 
 //setup template engine
 app.set('view engine', 'pug');
 app.set('views', './views/pug')
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  next();
+})
 
 //passport setup
 app.use(session({

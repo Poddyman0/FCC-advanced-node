@@ -3,11 +3,11 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 
-console.log('MongoDB URI:', process.env.MONGO_URI);
+console.log('MongoDB URI:', process.env.MONGODB_URI);
 
 
 async function main(callback) {
-    const URI = process.env.MONGO_URI; // Declare MONGO_URI in your .env file
+    const URI = process.env.MONGODB_URI; // Declare MONGO_URI in your .env file
     const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
