@@ -57,7 +57,7 @@ module.exports = function (app, myDataBase) {
   passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: 'https://redirectmeto.com/http://localhost:3000/auth/github/callback'
+    callbackURL: 'https://fcc-advanced-node-production.up.railway.app/auth/github/callback'
   },
     function(accessToken, refreshToken, profile, cb) {
       console.log(profile);
